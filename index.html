@@ -7,8 +7,8 @@ THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.
  
 Authors in chronological order of contribution:
 Tim Riedel
-Author 2
- 
+Amy Nguyen
+	
 Further Information:
 http://diystream.cns.utexas.edu/
 
@@ -17,10 +17,10 @@ Timothy Riedel
 triedel@utexas.edu
  
 Brief Description of Goal of Code:
-blah, blah, blah,
+The goal of this code is to create an interactive symptom checker that helps users compare common cold and allergy symptoms. The person using the app answers 6 questions and the code tracks their responses using simple JavaScript. At the end, it calculates and displays the percentage of answers associated with either cold or allergies, hopefully helping the user visualize which condition their symptoms more closely match.
  
 Known Issues:
-blah, blah, blah, blah
+This program weighs all questions equally and does not consider symptom severity or duration beyond specific targeted questions provided. The percentages are based on 6 fixed questions, so modifying the number of questions would require updating the toal question variable in the script. The tool is intended for demonstration purposes only and is not medically understandable. 
 Ignore this error message if you see it using the javaScript console: Error with Permissions-Policy header: Origin trial controlled feature not enabled: 'interest-cohort'.
 
 References:
@@ -29,47 +29,176 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 -->
 	
 <head> 
-	<title>Hello World</title>  
+	<title>Dehydration vs. Illness App</title>  
 ]	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<link rel="stylesheet" href="w3.css">
 	<link rel="stylesheet" href="w3-colors-flat.css">
+
+	<style>	
+	img, object{
+            	max-height:90%;
+        		max-width:90%;
+        	}
+		
+	.body {
+    	 margin: 0em;
+	}
+
+	.page {
+	    width: 100vw;
+	    height: 100vh;
+	    position: fixed;
+	    top: 0;
+	    left: -100vw;
+	    overflow-y: auto;
+	    z-index: 0;
+	    background-color: hsl(0,0%,100%);
+	}
+
+	.page:target {
+	    left: 0vw;
+	    z-index: 1;
+	}
+</style>
+
 </head> 
 
 <script>
+    var dehydration_count = 0;// variable to store how many answers match dehydration
+    var illness_count = 0; //variable to store how many answers match illness
 
-	//YOUR JAVASCRIPT GOES HERE
+		// function that adds 1 to dehydration_count
+	function dehydrationAdd(){
+        dehydration_count = dehydration_count + 1; 
+        }
+
+    function illnessAdd(){
+        illness_count = illness_count + 1; //function that adds 1 to illness_count
+        }
+
+	//function that calculates percentages and prints results	
+	function showResults(){
+		var dehydrationPercent = (dehydration_count / 5) * 100; //calculates percent for dehydration
+		var illnessPercent = (illness_count/5) * 100; //calculates percent for illness
+		var resultText = document.getElementById("results-text"); //gets paragraph where results will be printed
+		resultText.innerHTML = //changes content of paragraph
+			"Probability it is dehydration = " + dehydrationPercent + "%<br>" +
+			"Probability it is an illness = " + illnessPercent + "%";
+	}
 
 </script>	
-
-
-<!-- THIS STYLE CODE HELPS MAKE YOUR APP LOOK GOOD. PROBABLY DONT MESS WITH IT -->
-<style>	
-.body {
-     margin: 0em;
-}
-
-.page {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: -100vw;
-    overflow-y: auto;
-    z-index: 0;
-    background-color: hsl(0,0%,100%);
-}
-
-  .page:target {
-    left: 0vw;
-    z-index: 1;
-}
-</style>
-
+<!--- FIRST/HOME PAGE, includes introduction, instructions, and resizable image-->
+	
 <body>
+<div id="header" class="w3-container w3-blue
+	">
+	<h1>Dehydration or Illness?</h1>
+</div>
 	
-	<!-- HERE IS WHERE ALL OF YOUR HTML PAGES GO -->
-	REPLACE THIS TEXT
+<div id="content" class="w3-container">
+	<p>Are you feeling like you might be down with an illness but wonder if it is dehydration? Answer a few short questions to find out!</p>
+	 <img src="https://charlestongi.com/wp-content/uploads/2025/01/dehydration.png" alt="Water Bottle">
+	<!---Resizable image of dehydration picture-->
+	<a href="#one" class="w3-btn w3-grey w3-round"> Get Started </a>
 	
+	<p>The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at 		Austin.  This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only. Any user of this code 			does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.</p>
+ 	
+	<p>THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.</p>
+</div> 
+	
+<!-- QUESTION 1 -->
+<div class="page" id="one">
+	<div id="header" class="w3-container w3-blue">
+		<h1>Question 1</h1>
+	</div>
+	
+    	<div id="content" class="w3-container">
+        <p>Do you have a fever?</p>   
+
+		<a href="#two" onclick="illnessAdd();" class= "w3-btn w3-black"> Yes </a>
+		<a href="#two" onclick="dehydrationAdd();" class= "w3-btn w3-black"> No </a>
+
+    	</div>
+</div>
+
+<!-- QUESTION 2 -->
+<div class="page" id="two">
+	<div class="w3-container w3-blue">
+		<h1>Question 2</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+        <p>Is your mouth very dry?</p>   
+
+		<a href="#three" onclick="dehydrationAdd();" class= "w3-btn w3-black"> Yes </a>
+		<a href="#three" onclick="illnessAdd();" class= "w3-btn w3-black"> No </a>
+
+	</div>
+</div>	
+
+<!-- QUESTION 3 -->
+<div class="page" id="three">
+	<div class="w3-container w3-blue">
+		<h1>Question 3</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+        <p>Have you excersiced recently or been in direct heat for extended periods of time?</p>   
+
+		<a href="#four" onclick="dehydrationAdd();" class= "w3-btn w3-black"> Yes </a>
+		<a href="#four" onclick="illnessAdd();" class= "w3-btn w3-black"> No </a>
+
+	</div>
+</div>
+
+<!-- QUESTION 4 -->
+<div class="page" id="four">
+	<div class="w3-container w3-blue">
+		<h1>Question 4</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+        <p>Do you feel like your body aches?</p>   
+
+		<a href="#five" onclick="illnessAdd();" class= "w3-btn w3-black"> Yes </a>
+		<a href="#five" onclick="dehydrationAdd();" class= "w3-btn w3-black"> No </a>
+
+	</div>
+</div>
+
+<!-- QUESTION 5-->
+<div class="page" id="five">
+	<div class="w3-container w3-blue">
+		<h1>Question 5</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+        <p>Is your urine color darker than normal?</p>   
+
+		<a href="#six" onclick="dehydrationAdd();" class= "w3-btn w3-black"> Yes </a>
+		<a href="#six" onclick="illnessAdd();" class= "w3-btn w3-black"> No </a>
+
+	</div>
+</div>
+
+
+<!-- RESULTS PAGE -->
+ <div class="page" id="results-page">
+      <div class="w3-container w3-blue">
+        <h1>Results</h1>
+      </div>
+
+      <div class="w3-container">
+  <!-- Only this paragraph gets the results text -->
+  <p id="results-text"></p>
+		  
+      </div>
+    </div>
+	
+<footer class="w3-bottom w3-container w3-blue">
+	<p>DIY Diagnostics App 2026</p>
+</footer>
+
 </body>
 </html>
