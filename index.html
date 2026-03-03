@@ -65,6 +65,7 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 </head> 
 
 <script>
+	//variables to track user answers
     var dehydration_count = 0;// variable to store how many answers match dehydration
     var illness_count = 0; //variable to store how many answers match illness
 
@@ -82,6 +83,7 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 		var dehydrationPercent = (dehydration_count / 5) * 100; //calculates percent for dehydration
 		var illnessPercent = (illness_count/5) * 100; //calculates percent for illness
 		var resultText = document.getElementById("results-text"); //gets paragraph where results will be printed
+		//displays formated response
 		resultText.innerHTML = //changes content of paragraph
 			"Probability it is dehydration = " + dehydrationPercent + "%<br>" +
 			"Probability it is an illness = " + illnessPercent + "%";
@@ -101,7 +103,7 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 	 <img src="https://charlestongi.com/wp-content/uploads/2025/01/dehydration.png" alt="Water Bottle">
 	<!---Resizable image of dehydration picture-->
 	<a href="#one" class="w3-btn w3-grey w3-round"> Get Started </a>
-	
+	//disclaimer message for user
 	<p>The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at 		Austin.  This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only. Any user of this code 			does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.</p>
  	
 	<p>THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.</p>
@@ -115,7 +117,7 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 	
     	<div id="content" class="w3-container">
         <p>Do you have a fever?</p>   
-
+//clicking yes +1 to illness and moves to page two, clicking no +1 to dehydration and moves to page two
 		<a href="#two" onclick="illnessAdd();" class= "w3-btn w3-black"> Yes </a>
 		<a href="#two" onclick="dehydrationAdd();" class= "w3-btn w3-black"> No </a>
 
@@ -175,7 +177,7 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 	
 	<div id="content" class="w3-container">
         <p>Is your urine color darker than normal?</p>   
-
+//clicking updates counter and shows results
 		<a href="#results-page" onclick="dehydrationAdd(); showResults();" class="w3-btn w3-black">Yes</a>
         <a href="#results-page" onclick="illnessADd(); showResults();" class="w3-btn w3-black">No</a>
 
@@ -195,7 +197,7 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 		  
       </div>
     </div>
-	
+<!-- FOOTER-->
 <footer class="w3-bottom w3-container w3-blue">
 	<p>DIY Diagnostics App 2026</p>
 </footer>
